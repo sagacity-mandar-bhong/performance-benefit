@@ -42,7 +42,7 @@ export class CompanyFormComponent
       _serverApi,
       datepipe,
       _validationService,
-      _appRepoHelperService
+      // _appRepoHelperService
     );
 
     this.formData = new Object();

@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { WidgetConstants } from 'src/app/modules/widget-utility/widget-constants';
 import { MethodCall } from '@angular/compiler';
 import { ErrorCodes } from 'src/app/models/common/error-codes';
-import { ServerApiInterfaceServiceService } from 'src/app/server-api-interface-service.service';
+// import { ServerApiInterfaceServiceService } from 'src/app/server-api-interface-service.service';
 import { NotificationService } from './notification.service';
 import { AppRepoHelperService } from 'src/app/services/common/app-repo-helper.service';
 import { APP_SETTING } from 'src/app/constants/app-repo.constants';
+import { ServerApiInterfaceServiceService } from './server-api-interface-service.service';
 
 @Injectable({
     providedIn: 'root'
@@ -28,7 +29,7 @@ export class EventActionService implements OnDestroy {
         this.EventActionMap.set("htmlToPdfFileDownload", this.ActionHtmlToPdfFileDownload);
         this.EventActionMap.set("htmlToPdfFilePrint", this.ActionHtmlToPdfFilePrint);
         // this.EventActionMap.set("exportData", this.ActionExport);
-        this.EventActionMap.set("applyFilter", this.ActionApplyFilter);
+        // this.EventActionMap.set("applyFilter", this.ActionApplyFilter);
         this.EventActionMap.set("resetFilter", this.ActionResetFilter);
         this.EventActionMap.set("navigate", this.ActionNavigate);
         this.EventActionMap.set("refresh", this.ActionRefreshData);
@@ -54,7 +55,7 @@ export class EventActionService implements OnDestroy {
         this.EventActionMap.set("navigateWithParams", this.ActionNavigationWithStaticRouteParams);
         this.EventActionMap.set("dynamicNavigationWithRouteParams", this.ActionDynamicNavigationWithRouteParams);
         this.EventActionMap.set("setGlobalParams", this.ActionSetGlobaParams);
-        this.EventActionMap.set("fileUploadWithUserData", this.ActionOnFileUploadWithUserData);
+        // this.EventActionMap.set("fileUploadWithUserData", this.ActionOnFileUploadWithUserData);
         // this.EventActionMap.set("downloadFile", this.ActionDownload);
         this.EventActionMap.set("setNavigationData", this.ActionSetNavigationData);
         this.EventActionMap.set("copyWidgetData", this.ActionCopyWidgetData);
@@ -427,46 +428,46 @@ export class EventActionService implements OnDestroy {
     //caller compoent with same variable name e.g. in this case  "_router" should be present in caller
 
     // apply filter action
-    ActionApplyFilter(wigDataContext: any, params: any, eventparams: any) {
+    // ActionApplyFilter(wigDataContext: any, params: any, eventparams: any) {
 
-        let page = this.instance.pageInstance;
-        let src = eventparams;
-        let targ;
+    //     let page = this.instance.pageInstance;
+    //     let src = eventparams;
+    //     let targ;
 
-        params.forEach((param:any) => {
-            try {
-                let filterPosition = Object.keys(param).find((key) => key == "page.filterposition");
-                filterPosition = param[filterPosition!].replace(/'/g, "");
-                const filterCompInstance = page.compRefInstancesMap.get(filterPosition);
+    //     params.forEach((param:any) => {
+    //         try {
+    //             let filterPosition = Object.keys(param).find((key) => key == "page.filterposition");
+    //             filterPosition = param[filterPosition!].replace(/'/g, "");
+    //             const filterCompInstance = page.compRefInstancesMap.get(filterPosition);
 
-                let gridPosition = Object.keys(param).find((key) => key == "page.gridposition");
-                gridPosition = param[gridPosition!].replace(/'/g, "");
-                const gridCompInstance = page.compRefInstancesMap.get(gridPosition);
+    //             let gridPosition = Object.keys(param).find((key) => key == "page.gridposition");
+    //             gridPosition = param[gridPosition!].replace(/'/g, "");
+    //             const gridCompInstance = page.compRefInstancesMap.get(gridPosition);
 
-                const isvalid = filterCompInstance.Validate();
-                if (!isvalid) {
-                    page.collapse = false;
-                    return false;
-                }
-                page.collapse = true;
-                var filterData = filterCompInstance.GetValue();
+    //             const isvalid = filterCompInstance.Validate();
+    //             if (!isvalid) {
+    //                 page.collapse = false;
+    //                 return false;
+    //             }
+    //             page.collapse = true;
+    //             var filterData = filterCompInstance.GetValue();
                
-                //gridCompInstance.dataModel.apireqdata.wf = 'filter';
-                if(gridCompInstance){
-                targ = gridCompInstance.dataModel;
-                Object.keys(param).forEach((key) => {
-                    eval(`${key} = ${param[key]}`);
-                });
-                gridCompInstance.dataModel.apireqdata.fromlimit = 0;
-                Object.assign(gridCompInstance.dataModel.apireqdata, filterData);
-                gridCompInstance.ResetPagination();
-                gridCompInstance.configModel.CallerToComp.emit(WidgetConstants.CALLER_TO_COMP_REFRESH_DATA);
-            }
-            } catch (e) {
-                console.error("ActionApplyFilter error:", e);
-            }
-        });
-    }
+    //             //gridCompInstance.dataModel.apireqdata.wf = 'filter';
+    //             if(gridCompInstance){
+    //             targ = gridCompInstance.dataModel;
+    //             Object.keys(param).forEach((key) => {
+    //                 eval(`${key} = ${param[key]}`);
+    //             });
+    //             gridCompInstance.dataModel.apireqdata.fromlimit = 0;
+    //             Object.assign(gridCompInstance.dataModel.apireqdata, filterData);
+    //             gridCompInstance.ResetPagination();
+    //             gridCompInstance.configModel.CallerToComp.emit(WidgetConstants.CALLER_TO_COMP_REFRESH_DATA);
+    //         }
+    //         } catch (e) {
+    //             console.error("ActionApplyFilter error:", e);
+    //         }
+    //     });
+    // }
 
     ActionResetFilter(wigDataContext: any, params: any, eventparams: any) {
 
@@ -961,113 +962,113 @@ export class EventActionService implements OnDestroy {
 
     }
 
-    ActionOnFileUploadWithUserData(wigDataContext: any, params: any, eventparams: any, posteventaction: any) {
+    // ActionOnFileUploadWithUserData(wigDataContext: any, params: any, eventparams: any, posteventaction: any) {
 
-        let page = this.instance;
-        let isValid = true;
-        let skipSpinner:any;
-        var submitData = Object();
-        submitData.id = eventparams.id;
-        submitData.updateId = eventparams.updateId;
-        submitData.queryAction = eventparams.queryAction;
-        submitData.executeactionsubmitcode = eventparams.submitcode
-        params.forEach((param:any) => {
-            if (param.skipSpinner) {
-                skipSpinner = param.skipSpinner
-            }
-        })
+    //     let page = this.instance;
+    //     let isValid = true;
+    //     let skipSpinner:any;
+    //     var submitData = Object();
+    //     submitData.id = eventparams.id;
+    //     submitData.updateId = eventparams.updateId;
+    //     submitData.queryAction = eventparams.queryAction;
+    //     submitData.executeactionsubmitcode = eventparams.submitcode
+    //     params.forEach((param:any) => {
+    //         if (param.skipSpinner) {
+    //             skipSpinner = param.skipSpinner
+    //         }
+    //     })
 
-        if (eventparams.paramkeys) {
-            eventparams.paramkeys.forEach((element:any) => {
-                const val = eventparams[element]
-                submitData[element] = val;
-            });
-        }
+    //     if (eventparams.paramkeys) {
+    //         eventparams.paramkeys.forEach((element:any) => {
+    //             const val = eventparams[element]
+    //             submitData[element] = val;
+    //         });
+    //     }
 
-        let filesData = eventparams.fileData
-        const formData: FormData = new FormData();
-        for (const file of filesData.files) {
-            formData.append('files', file);
+    //     let filesData = eventparams.fileData
+    //     const formData: FormData = new FormData();
+    //     for (const file of filesData.files) {
+    //         formData.append('files', file);
 
-        }
+    //     }
 
-        try {
+    //     try {
 
-            if (!eventparams.positions && eventparams.positions.length == 0) {
-                console.error("ActionOnSubmitWithUserData error: submit data positions not found");
-                return
-            }
+    //         if (!eventparams.positions && eventparams.positions.length == 0) {
+    //             console.error("ActionOnSubmitWithUserData error: submit data positions not found");
+    //             return
+    //         }
 
-            eventparams.positions.forEach((position:any) => {
-                var compInstance = this.compRefInstancesMap.get(position);
-                if(compInstance && compInstance.Validate){
-                    const isvalid = compInstance.Validate();
-                    if (!isvalid && isValid) {
-                        isValid = isvalid;
-                    }
-                }
+    //         eventparams.positions.forEach((position:any) => {
+    //             var compInstance = this.compRefInstancesMap.get(position);
+    //             if(compInstance && compInstance.Validate){
+    //                 const isvalid = compInstance.Validate();
+    //                 if (!isvalid && isValid) {
+    //                     isValid = isvalid;
+    //                 }
+    //             }
                 
-            });
+    //         });
 
-            if (!isValid) { return; }
+    //         if (!isValid) { return; }
 
-            eventparams.positions.forEach((position:any) => {
-                var compInstance = this.compRefInstancesMap.get(position);
-                if(compInstance && compInstance.GetValue){
-                    const data = compInstance.GetValue();
-                    Object.assign(submitData, data);
-                }
+    //         eventparams.positions.forEach((position:any) => {
+    //             var compInstance = this.compRefInstancesMap.get(position);
+    //             if(compInstance && compInstance.GetValue){
+    //                 const data = compInstance.GetValue();
+    //                 Object.assign(submitData, data);
+    //             }
                 
-            });
+    //         });
 
-            formData.append('requestData', JSON.stringify(submitData));
+    //         formData.append('requestData', JSON.stringify(submitData));
 
-            const apiUrlConst = eventparams.apiUploadUrl;
-            if (!skipSpinner) {
-                page.showSpinner()
-            }
-            this._serverApi.upload<any, any>(apiUrlConst, formData).subscribe(
-                response => {
+    //         const apiUrlConst = eventparams.apiUploadUrl;
+    //         if (!skipSpinner) {
+    //             page.showSpinner()
+    //         }
+    //         this._serverApi.upload<any, any>(apiUrlConst, formData).subscribe(
+    //             response => {
 
-                    if (response && response.status == 'progress') {
-                        //todo implement progress bar
-                    }
-                    else if (response) {
-                        if (!skipSpinner) {
-                            page.hideSpinner();
-                        }
-                        //this._notificationService.success('File Uploaded');
-                        if (posteventaction && posteventaction.success) {
-                            posteventaction.success.forEach((item:any) => {
-                                eventparams.reqData = submitData
-                                eventparams.responseData = response;
-                                page._eventActionService.ActionHandler(wigDataContext, item, page, eventparams)
-                            });
-                        }
-                    }
+    //                 if (response && response.status == 'progress') {
+    //                     //todo implement progress bar
+    //                 }
+    //                 else if (response) {
+    //                     if (!skipSpinner) {
+    //                         page.hideSpinner();
+    //                     }
+    //                     //this._notificationService.success('File Uploaded');
+    //                     if (posteventaction && posteventaction.success) {
+    //                         posteventaction.success.forEach((item:any) => {
+    //                             eventparams.reqData = submitData
+    //                             eventparams.responseData = response;
+    //                             page._eventActionService.ActionHandler(wigDataContext, item, page, eventparams)
+    //                         });
+    //                     }
+    //                 }
 
-                }, error => {
-                    if (!skipSpinner) {
-                        page.hideSpinner();
-                    }
-                    if (posteventaction && posteventaction.failure) {
-                        posteventaction.failure.forEach((item:any) => {
-                            eventparams.reqData = submitData
-                            eventparams.responseData = error;
-                            page._eventActionService.ActionHandler(wigDataContext, item, page, eventparams)
-                        });
-                    }
-                    else{
-                        this._notificationService.error("Upload request failed");
-                    }
-                }
-            );
+    //             }, error => {
+    //                 if (!skipSpinner) {
+    //                     page.hideSpinner();
+    //                 }
+    //                 if (posteventaction && posteventaction.failure) {
+    //                     posteventaction.failure.forEach((item:any) => {
+    //                         eventparams.reqData = submitData
+    //                         eventparams.responseData = error;
+    //                         page._eventActionService.ActionHandler(wigDataContext, item, page, eventparams)
+    //                     });
+    //                 }
+    //                 else{
+    //                     this._notificationService.error("Upload request failed");
+    //                 }
+    //             }
+    //         );
 
-        } catch (e) {
-            console.error("ActionOnSubmitWithUserData error:", e);
-        }
+    //     } catch (e) {
+    //         console.error("ActionOnSubmitWithUserData error:", e);
+    //     }
 
-    }
+    // }
 
     ActionSubmitDataWithOrWithoutFileupload(wigDataContext: any, params: any, eventparams: any, posteventaction: any){
         let page = this.instance;

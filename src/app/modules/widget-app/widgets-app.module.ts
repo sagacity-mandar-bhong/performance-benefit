@@ -21,7 +21,8 @@ import { PerformaceCard1Component } from './performace-card1/performace-card1.co
   ],
   exports:[
     MoreInfoLinkDataComponent,
-    CompanyFormComponent
+    CompanyFormComponent,
+    PerformaceCard1Component
   ]
 })
 export class WidgetAppModule { }

@@ -4,7 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AppRepoHelperService } from 'src/app/services/common/app-repo-helper.service';
 import { EventActionService } from 'src/app/services/common/event-action.service';
 import { NotificationService } from 'src/app/services/common/notification.service';
-import { SaveFileService } from 'src/app/services/common/save-file.service';
+// import { SaveFileService } from 'src/app/services/common/save-file.service';
 import { ServerApiInterfaceServiceService } from 'src/app/services/common/server-api-interface-service.service';
 import { SessionStorageService } from 'src/app/services/common/session-storage.service';
 import { CompanyAddContainerComponent } from './company-add-container.component';
@@ -25,7 +25,7 @@ describe('CompanyAddContainerComponent', () => {
           Router,
           ActivatedRoute,
           NgxSpinnerService,
-          SaveFileService,
+          // SaveFileService,
           NotificationService,
           AppRepoHelperService,
         ],

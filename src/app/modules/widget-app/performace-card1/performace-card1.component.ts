@@ -9,6 +9,7 @@ import { WidgetComponentBase } from '../../widget-utility/widget-component-base'
 import { PerformanceCard1ConfigModel, PerformanceCard1DataModel } from './performance-card1-model';
 
 
+
 @Component({
   selector: 'app-performace-card1',
   templateUrl: './performace-card1.component.html',
@@ -26,15 +27,15 @@ export class PerformaceCard1Component extends WidgetComponentBase implements OnI
   @Input() configModel!: PerformanceCard1ConfigModel;
   
   constructor(
-    private _serverApiBase: ServerApiInterfaceServiceService,
-    private _validationService: ValidationService,
     private _formBuilder: FormBuilder,
-    private _serverBaseApi: ServerApiInterfaceServiceService,
+    private _serverApi: ServerApiInterfaceServiceService,
     private _datepipe: DatePipe,
-    public _validationServiceBase: ValidationService,
-    public _baseAppRepoHelperService: AppRepoHelperService
+    public _validationService: ValidationService
   ) { 
-    super(_formBuilder,_serverBaseApi,_datepipe,_validationServiceBase,_baseAppRepoHelperService)
+    super(_formBuilder,_serverApi,_datepipe,_validationService)
+  //  super(_formBuilderbase, _serverApiBase, _datepipe,_validationServiceBase)
+    // super(_formBuilderbase,_serverBaseApi,_datepipe,_validationServiceBase) 
+    // super(_formBuilder,_serverBaseApi,_datepipe,_validationServiceBase, _baseAppRepoHelperService)
     // super(_serverApiBase, _validationService,);
   }
 

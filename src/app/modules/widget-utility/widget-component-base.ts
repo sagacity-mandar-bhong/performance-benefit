@@ -1,31 +1,32 @@
 import { FormModeConstant, WidgetConstants } from './widget-constants';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
-import { ServerApiInterfaceServiceService } from 'src/app/server-api-interface-service.service';
+// import { ServerApiInterfaceServiceService } from 'src/app/server-api-interface-service.service';
 import { DatePipe } from '@angular/common';
 import { ValidationService } from 'src/app/services/common/validation.service';
 import { WidgetHelper } from './widget-helper';
 import { ElementRef, ViewChild, Directive } from '@angular/core';
+import { ServerApiInterfaceServiceService } from 'src/app/services/common/server-api-interface-service.service';
 declare var $: any;
 
 @Directive()
 export abstract class WidgetComponentBase {
-  wgFormGroup: FormGroup;
+  wgFormGroup?: FormGroup;
   dataModel: any;
   configModel: any;
-  isSubmitted: boolean;
+  isSubmitted?: boolean;
   wgFormData: any;
 
-  id: string;
-  apiDataUrl: string;
-  globalParameters: Map<string, any>;
-  fieldApiCount: number;
-  @ViewChild('formComponent') formComponent: NgForm;
+  id?: string;
+  apiDataUrl?: string;
+  globalParameters?: Map<string, any>;
+  fieldApiCount?: number;
+  @ViewChild('formComponent') formComponent?: NgForm;
   tempPermission:any = true;
 
-  abstract ConvertData(response: any);
-  abstract setFieldData();
-  abstract setMode(responseDataModel: any);
-  abstract SetValue(responseDataModel: any);
+  abstract ConvertData(response: any):any;
+  abstract setFieldData():any;
+  abstract setMode(responseDataModel: any):any;
+  abstract SetValue(responseDataModel: any):any;
 
 
   constructor(
@@ -97,9 +98,9 @@ export abstract class WidgetComponentBase {
   Validate(): boolean {
     this.isSubmitted = true;
     if (this.formComponent) {
-      this.formComponent.onSubmit(null);
+      this.formComponent.onSubmit(null!);
     }
-    return this.wgFormGroup.valid;
+    return this.wgFormGroup!.valid;
   }
 
   onSubmit($event: Event): boolean {
@@ -114,7 +115,7 @@ export abstract class WidgetComponentBase {
 
   wgSetRequestData() {
     if (this.dataModel.isGlobalParams) {
-      this.dataModel.globalParamterKeys.forEach(item => {
+      this.dataModel.globalParamterKeys.forEach((item:any) => {
         this.dataModel.apireqdata[item] = this.dataModel.globalParameters.get(item) ? this.dataModel.globalParameters.get(item) : null;
       })
     }
@@ -123,7 +124,7 @@ export abstract class WidgetComponentBase {
   wgSetFormData() {
 
     if (this.dataModel.isGlobalParams && this.wgFormData) {
-      this.dataModel.globalParamterKeys.forEach(item => {
+      this.dataModel.globalParamterKeys.forEach((item:any) => {
         this.wgFormData[item] = this.dataModel.globalParameters.get(item);
       })
     }
@@ -215,7 +216,7 @@ export abstract class WidgetComponentBase {
     return WidgetHelper.hasHelpIcon(this.dataModel, name);
   }
 
-  get wgFC() { return this.wgFormGroup.controls; }
+  get wgFC() { return this.wgFormGroup!.controls; }
 
   get fg() { return this.wgFormGroup; }
 
@@ -244,7 +245,7 @@ export abstract class WidgetComponentBase {
       this.formComponent.resetForm();
     }
     this.isSubmitted = false;
-    this.wgFormGroup.reset();
+    this.wgFormGroup!.reset();
   }
 
 }

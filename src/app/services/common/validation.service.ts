@@ -36,7 +36,7 @@ export class ValidationService {
     }
     createFormGroup(formData, permissions?: any, mode?: string) {
 
-        const group = this.formBuilder.group({}, { validator: this.bindValidations(formData.groupValidations) });
+        const group = this.formBuilder.group({}, { validator: this.bindValidations(formData?.groupValidations) });
         if (formData && formData.controls) {
             formData.controls.forEach(formControl => {
 
