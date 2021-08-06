@@ -1,0 +1,19 @@
+.performance-card {
+    border-radius: 4px;
+}
+
+.count-icon {
+    font-size: 50px !important;
+}
+
+.card-count {
+    font-weight: bold;
+    font-size: 30px;
+    /* line-height: 10px; */
+    margin-top: 5px;
+}
+
+.performance-card-lable {
+    font-size: 17px;
+    margin-top: -38px;
+}
