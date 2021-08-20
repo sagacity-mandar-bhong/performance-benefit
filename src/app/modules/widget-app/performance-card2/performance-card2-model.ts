@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
 
-export class PerformanceCard1ConfigModel {
-  static getInstance<T>(): PerformanceCard1ConfigModel {
-    let model = new PerformanceCard1ConfigModel();
+export class PerformanceCard2ConfigModel {
+  static getInstance<T>(): PerformanceCard2ConfigModel {
+    let model = new PerformanceCard2ConfigModel();
     return model
   }
 
@@ -13,7 +13,7 @@ export class PerformanceCard1ConfigModel {
   EventAction = new Map();
 }
 
-export class PerformanceCard1DataModel {
+export class PerformanceCard2DataModel {
     globalParameters: any;
     isGlobalParams: any;
     isSelfDataLoad: any;
@@ -21,15 +21,15 @@ export class PerformanceCard1DataModel {
     promoterPrefix: any;
     widgetStyle: any;
  
-    static getInstance<T>(): PerformanceCard1DataModel {
-      let model = new PerformanceCard1DataModel();
+    static getInstance<T>(): PerformanceCard2DataModel {
+      let model = new PerformanceCard2DataModel();
       model.isSelfDataLoad = false;
       model.globalParameters = new Map<any, any>();
       return model;
     }
   }
 
-  export interface PerformanceCard1Data {
+  export interface PerformanceCard2Data {
     isIconEnable: boolean,
     isMatIcon: boolean,
     icon: string,
@@ -40,6 +40,8 @@ export class PerformanceCard1DataModel {
     isCountEnable: boolean,
     count: string,
     countColor: string,
+    subtext:string,
+    sbutext2:string,
     backgroundColor: string,
     widgetStyle : any
   }

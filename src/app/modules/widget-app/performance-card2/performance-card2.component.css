@@ -1,10 +1,11 @@
 .performance-card {
     border-radius: 4px;
+    padding: 5px;
 }
 
 .count-icon {
-    font-size: 50px !important;
-    color: #ACACAC;
+    font-size: 40px !important;
+    color: #fff;
 }
 
 .card-count {
@@ -12,11 +13,11 @@
     font-size: 30px;
     /* line-height: 10px; */
     margin-top: 5px;
-    color: #ACACAC;
+    color: #fff;
 }
 
 .performance-card-lable {
     font-size: 17px;
     margin-top: -38px;
-    color: #ACACAC;
+    color: #fff;
 }

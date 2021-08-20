@@ -1,15 +1,16 @@
 import { ViewChildren, QueryList, Directive } from '@angular/core';
 import { ErrorCodes } from 'src/app/models/common/error-codes';
-import { ServerApiInterfaceServiceService } from 'src/app/server-api-interface-service.service';
+// import { ServerApiInterfaceServiceService } from 'src/app/server-api-interface-service.service';
 import { ComponentBuilderService } from 'src/app/services/component-builder/component-builder.service';
 import { EventActionService } from 'src/app/services/common/event-action.service';
-import { PlaceHolderComponent } from '../shared/place-holder/place-holder.component';
+// import { PlaceHolderComponent } from '../shared/place-holder/place-holder.component';
 import { WidgetConstants } from './widget-constants';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavigationStart } from '@angular/router';
 import { SessionStorageService } from 'src/app/services/common/session-storage.service';
 import { environment } from 'src/environments/environment';
+import { ServerApiInterfaceServiceService } from 'src/app/services/common/server-api-interface-service.service';
 
 @Directive()
 export class WidgetBase {
@@ -29,7 +30,7 @@ export class WidgetBase {
     submitData: any;
     requestCount: number = 0;
 
-    @ViewChildren(PlaceHolderComponent) private placeHolders: QueryList<PlaceHolderComponent>;
+    // @ViewChildren(PlaceHolderComponent) private placeHolders: QueryList<PlaceHolderComponent>;
 
     constructor(private _serverApiBase: ServerApiInterfaceServiceService,
         private _componentBuilderServiceBase: ComponentBuilderService,
@@ -127,30 +128,30 @@ export class WidgetBase {
                             this.pageprop = properties;
                         } else {
 
-                            let placeHoldersFiltered = this.placeHolders.filter((item) => item.viewContainerRef.element.nativeElement.id == widgetItem.position)
+                            // let placeHoldersFiltered = this.placeHolders.filter((item) => item.viewContainerRef.element.nativeElement.id == widgetItem.position)
 
-                            if (placeHoldersFiltered.length == 0) { return; }
+                            // if (placeHoldersFiltered.length == 0) { return; }
 
-                            let placeHolder = placeHoldersFiltered[0];
+                            // let placeHolder = placeHoldersFiltered[0];
 
-                            let builderResult = this._componentBuilderServiceBase.CreateComponet(widgetItem.widget, placeHolder)
+                            // let builderResult = this._componentBuilderServiceBase.CreateComponet(widgetItem.widget, placeHolder)
 
-                            if (!builderResult.isSuccess) { return; }
+                            // if (!builderResult.isSuccess) { return; }
                            
-                            if(environment.debugWidget){
-                                builderResult.componentRef.location.nativeElement.setAttribute("widget_page_id",  widgetItem.id);
-                                builderResult.componentRef.location.nativeElement.setAttribute("page_name",  this.pageReq.page);
-                                builderResult.componentRef.location.nativeElement.setAttribute("widget_name", widgetItem.widget)
-                            }
+                            // if(environment.debugWidget){
+                            //     builderResult.componentRef.location.nativeElement.setAttribute("widget_page_id",  widgetItem.id);
+                            //     builderResult.componentRef.location.nativeElement.setAttribute("page_name",  this.pageReq.page);
+                            //     builderResult.componentRef.location.nativeElement.setAttribute("widget_name", widgetItem.widget)
+                            // }
 
-                            this.compRefInstancesMap.set(widgetItem.position, builderResult.componentRef.instance)
+                            // this.compRefInstancesMap.set(widgetItem.position, builderResult.componentRef.instance)
 
                             let properties = JSON.parse(widgetItem.properties);
 
-                            builderResult.componentRef.instance.dataModel = this.ObjectDeepAssign(builderResult.componentRef.instance.dataModel, properties);
-                            if(builderResult.componentRef.instance.dataModel){
-                                builderResult.componentRef.instance.dataModel.PAGE_NAME = this.pageReq.page;
-                            }
+                            // builderResult.componentRef.instance.dataModel = this.ObjectDeepAssign(builderResult.componentRef.instance.dataModel, properties);
+                            // if(builderResult.componentRef.instance.dataModel){
+                                // builderResult.componentRef.instance.dataModel.PAGE_NAME = this.pageReq.page;
+                            // }
                            
                         
                             const submitData = this.submitData.filter(item => item.position == widgetItem.position);
@@ -158,47 +159,47 @@ export class WidgetBase {
 
 
                             // widget submit data properties mapping
-                            if (builderResult.componentRef.instance.dataModel.submitProperties && submitDataItem) {
-                                // if (submitData.length == 0) {
-                                //     console.log(widgetItem.position)
-                                //     return;
-                                // }
-                                const submitProperties = JSON.parse(submitDataItem.properties);
-                                const dataPositions = JSON.parse(submitDataItem.datapositions);
-                                builderResult.componentRef.instance.dataModel.submitProperties = submitProperties;
-                                Object.assign(builderResult.componentRef.instance.dataModel.submitProperties, dataPositions);
-                                builderResult.componentRef.instance.dataModel.submitProperties.id = submitDataItem.id;
-                                builderResult.componentRef.instance.dataModel.submitProperties.submitcode = submitDataItem.submitcode;
-                            }
+                            // if (builderResult.componentRef.instance.dataModel.submitProperties && submitDataItem) {
+                            //     // if (submitData.length == 0) {
+                            //     //     console.log(widgetItem.position)
+                            //     //     return;
+                            //     // }
+                            //     const submitProperties = JSON.parse(submitDataItem.properties);
+                            //     const dataPositions = JSON.parse(submitDataItem.datapositions);
+                            //     builderResult.componentRef.instance.dataModel.submitProperties = submitProperties;
+                            //     Object.assign(builderResult.componentRef.instance.dataModel.submitProperties, dataPositions);
+                            //     builderResult.componentRef.instance.dataModel.submitProperties.id = submitDataItem.id;
+                            //     builderResult.componentRef.instance.dataModel.submitProperties.submitcode = submitDataItem.submitcode;
+                            // }
 
-                            builderResult.componentRef.instance.dataModel.widgetinstanceid = widgetItem.id
+                            // builderResult.componentRef.instance.dataModel.widgetinstanceid = widgetItem.id
 
-                            builderResult.componentRef.instance.dataModel.globalParameters = this.globalParameters;
+                            // builderResult.componentRef.instance.dataModel.globalParameters = this.globalParameters;
 
                             if (widgetItem.eventactions) {
                                 let eventActionsMap = new Map(JSON.parse(widgetItem.eventactions))
-                                builderResult.componentRef.instance.configModel.EventAction = eventActionsMap;
+                                // builderResult.componentRef.instance.configModel.EventAction = eventActionsMap;
                             }
 
-                            builderResult.componentRef.instance.configModel.EventAction.forEach((events: any, eventName: string) => {
-                                builderResult.componentRef.instance.configModel.CompToCaller.addListener(eventName, (eventparams) => {
-                                    events.forEach(eventItem => {
-                                        this.componentEventHandler(builderResult.componentRef.instance.dataModel,eventItem, eventparams)
-                                    });
-                                }
-                                );
-                            });
-                            builderResult.componentRef.instance.configModel.CompToCaller.addListener(WidgetConstants.ON_REQUEST, (eventparams) => {
-                                    this.pageEventHandler(WidgetConstants.ON_REQUEST, eventparams)
-                            });
+                            // builderResult.componentRef.instance.configModel.EventAction.forEach((events: any, eventName: string) => {
+                                // builderResult.componentRef.instance.configModel.CompToCaller.addListener(eventName, (eventparams) => {
+                                    // events.forEach(eventItem => {
+                                    //     this.componentEventHandler(builderResult.componentRef.instance.dataModel,eventItem, eventparams)
+                                    // });
+                                // }
+                                // );
+                            // });
+                            // builderResult.componentRef.instance.configModel.CompToCaller.addListener(WidgetConstants.ON_REQUEST, (eventparams) => {
+                                    // this.pageEventHandler(WidgetConstants.ON_REQUEST, eventparams)
+                            // });
 
-                            builderResult.componentRef.instance.configModel.CompToCaller.addListener(WidgetConstants.ON_REQUEST_COMPLETED, (eventparams) => {
-                                this.pageEventHandler(WidgetConstants.ON_REQUEST_COMPLETED, eventparams)
-                            });
+                            // builderResult.componentRef.instance.configModel.CompToCaller.addListener(WidgetConstants.ON_REQUEST_COMPLETED, (eventparams) => {
+                                // this.pageEventHandler(WidgetConstants.ON_REQUEST_COMPLETED, eventparams)
+                            // });
 
-                            if (builderResult.componentRef.instance.InitComponent) {
-                                builderResult.componentRef.instance.InitComponent();
-                            }                            
+                            // if (builderResult.componentRef.instance.InitComponent) {
+                            //     builderResult.componentRef.instance.InitComponent();
+                            // }                            
                         }
 
                     } catch (e) {
@@ -300,10 +301,10 @@ export class WidgetBase {
     }
 
     clearPlaceHolderRef() {
-        this.placeHolders.forEach((pRef) => {
-            let viewContainerRef = pRef.viewContainerRef;
-            viewContainerRef.clear();
-        })
+        // this.placeHolders.forEach((pRef) => {
+        //     let viewContainerRef = pRef.viewContainerRef;
+        //     viewContainerRef.clear();
+        // })
     }
 
 }

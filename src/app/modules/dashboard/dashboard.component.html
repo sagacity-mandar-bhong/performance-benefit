@@ -1,2 +1,65 @@
-<app-performace-card1 [dataModel]="performanceCard1DataModel" [configModel]="performanceCard1ConfigModel">
-</app-performace-card1>
+<div class="container-fluid">
+    <div class="row my-2 mx-0">
+        <div class="col-6">
+            <mat-card>
+                <div class="row">
+                    <div class="text-center headingtitle">
+                        Cost of Street Works
+                    </div>
+                    <div class="col-6">
+                        <app-performace-card1 [dataModel]="performanceCard1DataModel" [configModel]="performanceCard1ConfigModel">
+                        </app-performace-card1>
+                    </div>
+                    <div class="col-6">
+                        <app-performace-card1 [dataModel]="performanceCard1DataModel2" [configModel]="performanceCard1ConfigModel2">
+                        </app-performace-card1>
+                    </div>
+                    <div class="col-6 mt-md-3">
+                        <app-performace-card1 [dataModel]="performanceCard1DataModel3" [configModel]="performanceCard1ConfigModel3">
+                        </app-performace-card1>
+                    </div>
+
+                    <div class="col-6 mt-md-3">
+                        <app-performace-card1 [dataModel]="performanceCard1DataModel4" [configModel]="performanceCard1ConfigModel4">
+                        </app-performace-card1>
+                    </div>
+                </div>
+
+            </mat-card>
+        </div>
+
+
+
+        <div class="col-6">
+            <mat-card>
+                <div class="row">
+                    <div class="text-center headingtitle">
+                        Customer, Compliance & Quality
+                    </div>
+                    <div class="col-6">
+                        <app-performance-card2 [dataModel]="performanceCard2DataModel" [configModel]="performanceCard2ConfigModel">
+                        </app-performance-card2>
+
+                    </div>
+                    <div class="col-6">
+                        <!-- <app-performance-card2 [dataModel]="performanceCard2DataModel" [configModel]="performanceCard2ConfigModel">
+                        </app-performance-card2> -->
+                        <app-performance-card2 [dataModel]="performanceCard2DataModel2" [configModel]="performanceCard2ConfigModel2">
+                        </app-performance-card2>
+                    </div>
+                    <div class="col-6 mt-md-3">
+                        <app-performance-card2 [dataModel]="performanceCard2DataModel3" [configModel]="performanceCard2ConfigModel3">
+                        </app-performance-card2>
+                    </div>
+
+                    <div class="col-6 mt-md-3">
+                        <app-performance-card2 [dataModel]="performanceCard2DataModel4" [configModel]="performanceCard2ConfigModel4">
+                        </app-performance-card2>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+
+    </div>
+</div>

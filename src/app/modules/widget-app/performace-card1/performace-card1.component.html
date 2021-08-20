@@ -1,22 +1,23 @@
-<mat-card class="performance-card" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="17px" fxFlex="100%">
-    <span class="performance-card-lable" fxLayout="row" fxLayoutAlign="center center">
-        <!-- {{dataModel.data.text}} -->
-        dfasdfas
-    </span>
+<mat-card class="performance-card text-center" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="17px" fxFlex="100%">
+
     <div [ngStyle]="{'width':'100%'}" class="mb-3" fxLayout="row" fxLayoutAlign="space-between center">
         <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center">
             <mat-icon [inline]="true" class="count-icon">
-                <!-- {{dataModel.data.icon}} -->
-                dfasfdsdaf
+                {{dataModel.data.icon}}
+                <!-- dfasfdsdaf -->
             </mat-icon>
             <!-- <ng-template #showImg>
                 <img [src]="dataModel.data.icon" alt="_ic_count" width="60px" height="60px">
             </ng-template> -->
         </div>
         <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center">
-            <span class="card-count">
-            fdsa %
+            <span class="card-count" [ngStyle]="{color:dataModel.data.countColor}">
+                &#163; {{dataModel.data.count}} 
               </span>
         </div>
     </div>
+    <span class="performance-card-lable" fxLayout="row" fxLayoutAlign="center center">
+        {{dataModel.data.text}}
+        <!-- dfasdfas -->
+    </span>
 </mat-card>
